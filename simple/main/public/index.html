@@ -7,5 +7,39 @@
   <body>
     A simple app
     <br />
+    <table id="main">
+      <thead>
+        Car name
+      </thead>
+      <tbody></tbody>
+    </table>
+    <button id="load">Load</button>
+    <script type="text/javascript">
+      var tableBody = document.getElementsByTagName("tbody")[0];
+      function getData() {
+        fetch("http://localhost:8080/cars")
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
+            var receivedArray = data;
+            for (let item of receivedArray) {
+              if (item.color === "red") {
+                var row = document.createElement("tr");
+                var tableData = document.createElement("td");
+                tableData.innerHTML = item.name;
+                row.appendChild(tableData);
+                tableBody.appendChild(row);
+              }
+            }
+          });
+      }
+
+      const btn = document.getElementById("load");
+      btn.addEventListener("click", (event) => {
+        //console.log("Button clicked");
+        getData();
+      });
+    </script>
   </body>
 </html>

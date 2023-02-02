@@ -3,6 +3,8 @@ import store from "../stores/RobotStore";
 import Robot from "./Robot";
 
 function RobotList(props) {
+  console.log(props.dataFromApp);
+
   const [robots, setRobots] = useState([]);
 
   useEffect(() => {
